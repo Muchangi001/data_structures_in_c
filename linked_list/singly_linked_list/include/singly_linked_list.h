@@ -34,7 +34,7 @@ struct Node {
 
 extern struct singly_linked_list LINKED_LIST;
 
-struct Node* create_new_node();
+struct Node* createNode();
 bool is_head_null(struct Node **node); // checks if a the head node is NULL
 bool is_tail_null(struct Node **tail); // checks if the tail node is NULL
 bool node_exists(struct Node **head, struct Node **node); // checks if a node exists
@@ -47,6 +47,6 @@ void replace(struct Node **head, struct Node **tail, struct Node **node, size_t 
 void deleteHead(struct Node **head, struct Node **tail); // deletes the head node
 void deleteTail(struct Node **head, struct Node **tail); // deletes the tail node
 void deleteNode(struct Node **head, struct Node **tail,size_t index); // deletes a specific node
-void free_nodes(struct Node **head);
+void freeNodes(struct Node **head);
 
 #endif

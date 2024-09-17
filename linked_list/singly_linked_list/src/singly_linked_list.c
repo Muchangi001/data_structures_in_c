@@ -1,8 +1,8 @@
 #include "../include/singly_linked_list.h"
 
-struct singly_linked_list LINKED_LIST = {.createNode=&create_new_node, .node_exists=&node_exists, .traverse=&traverse, .prepend=&prepend, .append=&append, .insert=&insert,
-                                        .update=&update, .replace=&replace, .deleteHead=&deleteHead, .deleteTail=&deleteTail, .deleteNode=&deleteNode, .freeNodes=&free_nodes};
-struct Node* create_new_node() {
+struct singly_linked_list LINKED_LIST = {.createNode=&createNode, .node_exists=&node_exists, .traverse=&traverse, .prepend=&prepend, .append=&append, .insert=&insert,
+                                        .update=&update, .replace=&replace, .deleteHead=&deleteHead, .deleteTail=&deleteTail, .deleteNode=&deleteNode, .freeNodes=&freeNodes};
+struct Node* createNode() {
     struct Node *node = malloc(sizeof(struct Node));
     if (!node) {
         fprintf(stderr, "Error : Memory allocation to create new node failed.\n");
@@ -167,6 +167,14 @@ void update(struct Node **head, struct Node **tail, char *new_value, size_t inde
 
 void replace(struct Node **head, struct Node **tail, struct Node **node, size_t index) {
     if (is_head_null(head)) return;
+    if (is_tail_null(tail)) return;
+
+    if (index == 0) {
+       (*node)->next = (*head)->next;
+        free(*head);
+        *head = *node;
+        return;
+    }
 
     struct Node *currentNode, *tempNode;
     currentNode = *head;
@@ -253,7 +261,7 @@ void deleteNode(struct Node **head, struct Node **tail, size_t index) {
     currentNode->next = tempNode->next;
 }
 
-void free_nodes(struct Node **head) {
+void freeNodes(struct Node **head) {
     struct Node *currentNode, *nextNode;
     for (currentNode = *head; currentNode; currentNode = nextNode) {
         nextNode = currentNode->next;

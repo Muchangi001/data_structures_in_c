@@ -2,7 +2,7 @@
 
 int main() {
 
-    struct Node *head = LINKED_LIST.createNode();
+struct Node *head = LINKED_LIST.createNode();
     struct Node *tail = LINKED_LIST.createNode();
 
     strcpy(head->data, "Andrew");
@@ -57,6 +57,6 @@ int main() {
 
     // Deallocate memory from the heap
     LINKED_LIST.freeNodes(&head);
-
+    
     return 0;
 }
