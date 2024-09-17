@@ -1,7 +1,7 @@
 #include "../include/singly_linked_list.h"
 
 struct singly_linked_list LINKED_LIST = {.createNode=&create_new_node, .node_exists=&node_exists, .traverse=&traverse, .prepend=&prepend, .append=&append, .insert=&insert,
-                                        .update=&update, .replace=&replace, .deleteHead=&deleteHead, .deleteTail=&deleteTail, .deleteNode=&deleteNode};
+                                        .update=&update, .replace=&replace, .deleteHead=&deleteHead, .deleteTail=&deleteTail, .deleteNode=&deleteNode, .freeNodes=&free_nodes};
 struct Node* create_new_node() {
     struct Node *node = malloc(sizeof(struct Node));
     if (!node) {
@@ -251,4 +251,13 @@ void deleteNode(struct Node **head, struct Node **tail, size_t index) {
     }
 
     currentNode->next = tempNode->next;
+}
+
+void free_nodes(struct Node **head) {
+    struct Node *currentNode, *nextNode;
+    for (currentNode = *head; currentNode; currentNode = nextNode) {
+        nextNode = currentNode->next;
+        free(currentNode);
+    }
+    *head = NULL;
 }

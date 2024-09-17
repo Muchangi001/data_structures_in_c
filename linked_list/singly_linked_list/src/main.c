@@ -55,5 +55,8 @@ int main() {
     LINKED_LIST.deleteNode(&head, &tail, 0);
     LINKED_LIST.traverse(head);
 
+    // Deallocate memory from the heap
+    LINKED_LIST.freeNodes(&head);
+
     return 0;
 }

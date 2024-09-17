@@ -24,6 +24,7 @@ struct singly_linked_list {
     void (*deleteHead) (struct Node **head, struct Node **tail);
     void (*deleteTail) (struct Node **head, struct Node **tail);
     void (*deleteNode) (struct Node **head, struct Node **tail, size_t index);
+    void (*freeNodes) (struct Node **head);
 };
 
 struct Node {
@@ -46,5 +47,6 @@ void replace(struct Node **head, struct Node **tail, struct Node **node, size_t 
 void deleteHead(struct Node **head, struct Node **tail); // deletes the head node
 void deleteTail(struct Node **head, struct Node **tail); // deletes the tail node
 void deleteNode(struct Node **head, struct Node **tail,size_t index); // deletes a specific node
+void free_nodes(struct Node **head);
 
 #endif
