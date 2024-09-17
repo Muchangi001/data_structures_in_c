@@ -160,7 +160,8 @@ void update(struct Node **head, struct Node **tail, char *new_value, size_t inde
     }
 
     struct Node *currentNode = *head;
-
+    
+    // Loop upto the node to be updated
     for (size_t i = 0; currentNode && i < index; currentNode = currentNode->next, ++i);
     strcpy(currentNode->data, new_value);
 }
