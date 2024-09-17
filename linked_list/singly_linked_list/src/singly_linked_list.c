@@ -22,8 +22,8 @@ bool is_head_null(struct Node **head) {
     return false;
 }
 
-bool is_tail_null(struct Node **head) {
-    if (!*head) {
+bool is_tail_null(struct Node **tail) {
+    if (!*tail) {
         fprintf(stderr, "Error : Tail is NULL.\n");
         return true;
     }
