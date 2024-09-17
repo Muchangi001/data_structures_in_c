@@ -1,7 +1,19 @@
 #include "../include/singly_linked_list.h"
 
-struct singly_linked_list LINKED_LIST = {.createNode=&createNode, .node_exists=&node_exists, .traverse=&traverse, .prepend=&prepend, .append=&append, .insert=&insert,
-                                        .update=&update, .replace=&replace, .deleteHead=&deleteHead, .deleteTail=&deleteTail, .deleteNode=&deleteNode, .freeNodes=&freeNodes};
+struct singly_linked_list LINKED_LIST = {
+    .createNode=&createNode,
+    .node_exists=&node_exists,
+    .traverse=&traverse,
+    .prepend=&prepend,
+    .append=&append,
+    .insert=&insert,
+    .update=&update, .replace=&replace,
+    .deleteHead=&deleteHead,
+    .deleteTail=&deleteTail,
+    .deleteNode=&deleteNode,
+    .freeNodes=&freeNodes
+    };
+    
 struct Node* createNode() {
     struct Node *node = malloc(sizeof(struct Node));
     if (!node) {
