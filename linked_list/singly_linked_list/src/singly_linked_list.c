@@ -3,7 +3,7 @@
 struct singly_linked_list LINKED_LIST = {
     .createNode=&createNode,
     .node_exists=&node_exists,
-    .traverse=&traverse,
+    .print=&print,
     .prepend=&prepend,
     .append=&append,
     .insert=&insert,
@@ -52,8 +52,9 @@ bool node_exists(struct Node **head, struct Node **node) {
     return false;
 }
 
-void traverse(struct Node *head) {
-    struct Node *currentNode = head;
+void print(struct Node **head) {
+    struct Node *currentNode = *head;
+    if (is_head_null(head)) return;
     printf("\n");
     printf("SINGLY_LINKED_LIST\n");
     for (size_t i = 0; currentNode; currentNode = currentNode->next, ++i) printf("Node[%d] : %s\n", i, currentNode->data);
@@ -119,7 +120,7 @@ void append(struct Node **head, struct Node **tail, struct Node **node) {
     if (*head == *tail) {
         (*node)->next = NULL;
         (*head)->next = *node;
-        *tail = *head;
+        *tail = *node;
         return;
     }
 
