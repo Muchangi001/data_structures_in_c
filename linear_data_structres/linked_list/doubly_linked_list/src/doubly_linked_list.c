@@ -76,8 +76,9 @@ void prepend(struct Node **head, struct Node **tail, struct Node **node) {
     // checks if the list has only one node
     if (*head == *tail) {
         (*node)->next = *head;
-        free(*head);
+        (*head)->prev = *node;
         *head = *node;
+        (*head)->prev = NULL;
         
         *tail = (*head)->next;
         (*tail)->prev = *head;
@@ -111,19 +112,17 @@ void append(struct Node **head, struct Node **tail, struct Node **node) {
     if (is_tail_null(tail)) return;
 
     if (*head == *tail) {
-        (*node)->next = NULL;
-
+        (*node)->prev = *tail;
         (*head)->next = *node;
         (*head)->prev = NULL;
 
         *tail = *node;
-
+        (*tail)->next = NULL;
         return;
     }
 
-    (*tail)->next = *node;
     (*node)->prev = *tail;
-    
-    (*node)->next = NULL;
+    (*tail)->next = *node;
     *tail = *node;
+    (*tail)->next = NULL;
 }

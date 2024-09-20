@@ -21,6 +21,6 @@ int main() {
     append(&head, &tail, &n2);
     print_list(&head);
 
-    printf("prev <- %s\nnext -> %s\n", head->next->next->prev, head->next->next->next);
+    printf("prev <- %s\nnext -> %s\n", head->next->next->prev, head->next->next);
     return 0;
 }
