@@ -22,6 +22,8 @@ struct singly_linked_list {
     void (*append) (struct Node **Node);
     void (*deleteHead) ();
     void (*deleteTail) ();
+    void (*deleteNode) (size_t index);
+    size_t (*get_size) ();
 };
 
 struct Node {

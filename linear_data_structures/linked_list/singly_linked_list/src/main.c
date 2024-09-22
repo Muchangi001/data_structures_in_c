@@ -26,20 +26,32 @@ int main() {
     SINGLY_LINKED_LIST.link_head_to_tail(&n1, &n2);
 
     // prepending
+    printf("\nprepending ...\n");
     struct Node *n3 = SINGLY_LINKED_LIST.createNode();
     n3->data = 3;
     SINGLY_LINKED_LIST.prepend(&n3);
+    SINGLY_LINKED_LIST.printList();
 
     // appending
+    printf("\nappending ...\n");
     struct Node *n4 = SINGLY_LINKED_LIST.createNode();
     n4->data = 4;
     SINGLY_LINKED_LIST.append(&n4);
+    SINGLY_LINKED_LIST.printList();
 
     // deleting head
+    printf("\ndeleting head ...\n");
     SINGLY_LINKED_LIST.deleteHead();
+    SINGLY_LINKED_LIST.printList();
     
     // deleting tail
+    printf("\ndeleting tail ...\n");
     SINGLY_LINKED_LIST.deleteTail();
+    SINGLY_LINKED_LIST.printList();
+
+    // deleting a Node
+    printf("\ndeleting node ...\n");
+    SINGLY_LINKED_LIST.deleteNode(0);
     SINGLY_LINKED_LIST.printList();
 
     printf("\nhead -> %d\ntail -> %d\n\n", SINGLY_LINKED_LIST.head->data, SINGLY_LINKED_LIST.tail->data);
