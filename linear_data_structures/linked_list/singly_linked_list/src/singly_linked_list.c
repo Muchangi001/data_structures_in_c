@@ -146,7 +146,7 @@ void deleteHead() {
 }
 
 void deleteTail() {
-    // ensuring the tail is not null
+    // ensuring the head is not null
     if (!SINGLY_LINKED_LIST.head) {
         fprintf(stderr, "Error : Failed to delete tail, head is null.\n");
         return;
