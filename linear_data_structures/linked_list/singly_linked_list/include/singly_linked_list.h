@@ -20,10 +20,12 @@ struct singly_linked_list {
     void (*printList) ();
     void (*prepend) (struct Node **node);
     void (*append) (struct Node **Node);
+    void (*insert) (struct Node **node, size_t index);
     void (*deleteHead) ();
     void (*deleteTail) ();
     void (*deleteNode) (size_t index);
     size_t (*get_size) ();
+    void (*freeNodes) ();
 };
 
 struct Node {

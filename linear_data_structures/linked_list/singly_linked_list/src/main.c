@@ -39,6 +39,13 @@ int main() {
     SINGLY_LINKED_LIST.append(&n4);
     SINGLY_LINKED_LIST.printList();
 
+    // inserting
+    printf("\ninserting ...\n");
+    struct Node *n5 = SINGLY_LINKED_LIST.createNode();
+    n5->data = 5;
+    SINGLY_LINKED_LIST.insert(&n5, 3);
+    SINGLY_LINKED_LIST.printList();
+
     // deleting head
     printf("\ndeleting head ...\n");
     SINGLY_LINKED_LIST.deleteHead();
@@ -53,7 +60,11 @@ int main() {
     printf("\ndeleting node ...\n");
     SINGLY_LINKED_LIST.deleteNode(0);
     SINGLY_LINKED_LIST.printList();
-
+    
     printf("\nhead -> %d\ntail -> %d\n\n", SINGLY_LINKED_LIST.head->data, SINGLY_LINKED_LIST.tail->data);
+
+    // freeing nodes from heap
+    SINGLY_LINKED_LIST.freeNodes();
+    
     return 0;
 }

@@ -1,5 +1,6 @@
 #include "../include/singly_linked_list.h"
 
+bool node_exists(struct Node **node);
 void initHead(struct Node **head);
 void initTail(struct Node **tail);
 void link_head_to_tail(struct Node **head, struct Node **tail);
@@ -7,10 +8,12 @@ struct Node* createNode();
 void printList();
 void prepend(struct Node **node);
 void append(struct Node **node);
+void insert(struct Node **node, size_t index);
 void deleteHead();
 void deleteTail();
 void deleteNode(size_t index);
 size_t get_size();
+void freeNodes();
 
 struct singly_linked_list SINGLY_LINKED_LIST = {
     .head=NULL,
@@ -22,11 +25,23 @@ struct singly_linked_list SINGLY_LINKED_LIST = {
     .printList=&printList,
     .prepend=&prepend,
     .append=&append,
+    .insert=&insert,
     .deleteHead=&deleteHead,
     .deleteTail=&deleteTail,
     .deleteNode=&deleteNode,
     .get_size=&get_size,
+    .freeNodes=&freeNodes,
 };
+
+bool node_exists(struct Node **node) {
+    for (struct Node *curr = SINGLY_LINKED_LIST.head; curr; curr= curr->next) {
+        if (curr == *node) {
+            fprintf(stderr, "Error : Node already exists.\n");
+            return true;
+        } 
+    }
+    return false;
+}
 
 void initHead(struct Node **head) {
     if (!*head) {
@@ -87,6 +102,9 @@ void prepend(struct Node **node) {
         return;
     }
 
+    // ensuring the node doesn't exist in the list
+    if (node_exists(node)) return;
+
     // prepend to an empty list
     if (!SINGLY_LINKED_LIST.head) {
         SINGLY_LINKED_LIST.head = SINGLY_LINKED_LIST.tail = *node;
@@ -113,6 +131,9 @@ void append(struct Node **node) {
         return;
     }
 
+    // ensuring the node doesn't exist in the list
+    if (node_exists(node)) return;
+
     // appending to an empty list
     if (!SINGLY_LINKED_LIST.head) {
         SINGLY_LINKED_LIST.head = SINGLY_LINKED_LIST.tail = *node;
@@ -128,6 +149,40 @@ void append(struct Node **node) {
 
     SINGLY_LINKED_LIST.tail->next = *node;
     SINGLY_LINKED_LIST.tail = *node;
+}
+
+void insert(struct Node **node, size_t index) {
+    // ensuring the node to be appended is not null
+    if (!*node) {
+        fprintf(stderr, "Error : Failed to append node, pointer to node is empty.\n");
+        return;
+    }
+
+    // ensuring the node doesn't exist in the list
+    if (node_exists(node)) return;
+
+    // ensuring the index is not out of range
+    if (index > get_size()) {
+        fprintf(stderr, "Error : Failed to delete Node, index out of range.\n");
+        return;
+    }
+
+    if (index == 0) {
+        prepend(node);
+        return;
+    }
+
+    if (index == -1) {
+        append(node);
+        return;
+    }
+
+    size_t i = 0;
+    struct Node *curr;
+    for (curr = SINGLY_LINKED_LIST.head; curr && i < index - 1; curr = curr->next, ++i);
+    struct Node *tempNode = curr->next;
+    curr->next = *node;
+    (*node)->next = tempNode;
 }
 
 void deleteHead() {
@@ -214,4 +269,19 @@ size_t get_size() {
     struct Node *curr;
     for (curr = SINGLY_LINKED_LIST.head; curr; curr = curr->next, ++count);
     return count;
+}
+
+void freeNodes() {
+    // ensuring the head is not null
+    if (!SINGLY_LINKED_LIST.head) {
+        fprintf(stderr, "Error : Free nodes from heap, head is null.\n");
+        return;
+    }
+    struct Node *curr, *next;
+    for (curr = SINGLY_LINKED_LIST.head; curr; curr = next) {
+        next = curr->next;
+        free(curr);
+    }
+
+    SINGLY_LINKED_LIST.head = NULL;
 }
