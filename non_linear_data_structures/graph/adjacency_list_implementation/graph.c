@@ -36,10 +36,11 @@ void addNode(struct Graph *g, struct AdjNode *n) {
 }
 
 void addEdge(struct Graph *g, int src, int dest) {
-    g->listArray[dest].head->next = g->listArray[src].head->next;
-    g->listArray[src].head->next = g->listArray[dest].head;
+    struct AdjNode *n = malloc(sizeof(struct AdjNode));
+    n->data = g->listArray[dest].head->data;
+    n->next = g->listArray[src].head->next;
+    g->listArray[src].head->next = n;
 }
-
 
 void printGraph(struct Graph *g) {
     printf("\nADJACENCY LISTS\n");
