@@ -34,7 +34,6 @@ void addNode(Graph *g, Node *n) {
 void addEdge(Graph *g, int src, int dest) {
     // Dense Graph
     g->matrix[src][dest] = 1;
-    g->matrix[dest][src] = 1;
 }
 
 void printMatrix(Graph *g) {
@@ -88,10 +87,12 @@ int main() {
     addNode(&g, &n5);
 
     addEdge(&g, 0, 1);
-    addEdge(&g, 0, 2);
-    addEdge(&g, 1, 3);
+    addEdge(&g, 1, 2);
+    addEdge(&g, 1, 4);
     addEdge(&g, 2, 3);
-    addEdge(&g, 3, 4);
+    addEdge(&g, 2, 4);
+    addEdge(&g, 4, 0);
+    addEdge(&g, 4, 2);
 
     printMatrix(&g);
     printNodeConnection(&g);
